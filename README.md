@@ -1,8 +1,8 @@
 # 🎯 Smart Focus Assistant - Browser Extension
 
-> **AI-Powered Focus and Productivity Tool for Students & Professionals**
+> **A Distraction-Free Study and Productivity Tool for Students & Professionals**
 
-A comprehensive Chrome/Edge extension that helps users maintain focus, track productivity, and build discipline through intelligent website blocking, Pomodoro timers, and AI-powered analytics.
+A Chrome/Edge extension that helps users maintain focus, block distractions, and track productivity with clean analytics and beautiful design.
 
 ---
 
@@ -13,10 +13,8 @@ A comprehensive Chrome/Edge extension that helps users maintain focus, track pro
 - [Installation](#-installation)
 - [Project Structure](#-project-structure)
 - [Usage Guide](#-usage-guide)
-- [Features Deep Dive](#-features-deep-dive)
 - [Development](#-development)
 - [Testing Checklist](#-testing-checklist)
-- [Evaluation Metrics](#-evaluation-metrics)
 - [Future Enhancements](#-future-enhancements)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -26,553 +24,174 @@ A comprehensive Chrome/Edge extension that helps users maintain focus, track pro
 ## ✨ Features
 
 ### Core Functionality
-- ✅ **Smart Website Blocking** - Blocks distracting websites during focus sessions
-- ⏱️ **Pomodoro Timer** - Customizable focus/break intervals (25-5-15 default)
-- 📊 **Analytics Dashboard** - Visualize your productivity with beautiful charts
-- 🔥 **Streak Tracking** - Build consistency with daily streak monitoring
-- 💡 **AI Insights** - Smart recommendations based on your focus patterns
-- 🎨 **Beautiful UI** - Modern, glassmorphic design with smooth animations
-- 🔔 **Smart Notifications** - Get notified about session completions
-- 📈 **Progress Tracking** - Track total sessions, focus time, and blocked distractions
+- ✅ **Smart Website Blocking** – Blocks distracting websites during focus sessions  
+- 📊 **Analytics Dashboard** – Tracks focus time, blocked attempts, and success rate  
+- 🔥 **Streak Tracking** – Encourages daily consistency  
+- 💡 **Focus Insights** – Displays focus vs. distraction metrics  
+- 🎨 **Modern UI** – Gradient glassmorphic design with smooth animations  
+- 🔔 **Notifications** – Inform users when sites are blocked  
+- 📈 **Progress Tracking** – Total sessions, blocked sites, and attempts  
 
-### Advanced Features
-- 🎯 **Session Progress** - Visual indicators showing completed Pomodoros
-- 🌐 **Custom Block Lists** - Add/remove websites with one click
-- 📥 **Import/Export** - Backup and restore your block list
-- 💪 **Motivational Quotes** - Stay inspired with randomized quotes
-- 📊 **Multiple Chart Types** - Weekly, hourly, monthly, and distribution charts
-- 🎨 **Theme Customization** - Choose from multiple color schemes
-- ⚙️ **Flexible Settings** - Customize every aspect of your focus experience
+### Bonus Features
+- 🚫 **Quick Add Distractions** – One-click add for popular sites (Netflix, Discord, etc.)  
+- 📥 **Import/Export Blocklist** – Save and reuse your block lists  
+- 🌗 **Responsive Design** – Works across desktop browsers  
 
 ---
 
 ## 🛠️ Technology Stack
 
 ### Frontend
-- **HTML5** - Structure and content
-- **CSS3** - Modern styling with gradients, animations, and glassmorphism
-- **JavaScript (ES6+)** - Core logic and interactivity
+- **HTML5** – Page structure  
+- **CSS3** – UI styling and layout  
+- **JavaScript (ES6)** – Core logic  
 
-### Extension Framework
-- **Chrome Extension API (Manifest V3)** - Latest extension architecture
-- **Service Workers** - Background processing
-- **Content Scripts** - Page-level blocking
-- **Web Navigation API** - Real-time URL blocking
-
-### Data & Analytics
-- **Chrome Storage API** - Local data persistence
-- **IndexedDB** - Session history storage
-- **Chart.js 3.9.1** - Beautiful data visualizations
-
-### Optional (Future)
-- **TensorFlow.js** - ML-based focus pattern prediction
-- **Firebase** - Cloud sync and cross-device support
-- **Node.js/Express** - Backend API for advanced features
+### Chrome Extension APIs
+- **Manifest V3** – Latest Chrome architecture  
+- **chrome.storage.local** – Save user data  
+- **chrome.webNavigation** – Detect and block sites  
+- **Chart.js** – Data visualization  
 
 ---
 
 ## 📦 Installation
 
-### For Users
+### 🧩 Option 1 — From GitHub (Recommended for Judges)
 
-1. **Download the Extension**
-   ```bash
-   git clone https://github.com/yourusername/smart-focus-assistant.git
-   cd smart-focus-assistant
-   ```
+1. Visit the official release page:  
+   👉 [Smart Focus Assistant v1.0](https://github.com/Stormboomop/Hackathon/releases/tag/v1.0)
 
-2. **Load in Chrome/Edge**
-   - Open Chrome/Edge
-   - Navigate to `chrome://extensions/`
-   - Enable "Developer mode" (toggle in top-right)
-   - Click "Load unpacked"
-   - Select the extension folder
+2. Download either:
+   - `SmartFocusAssistant.crx` — packaged extension (for Chromium browsers), **or**
+   - “Source code (ZIP)” — unpacked folder for Chrome.
 
-3. **Pin the Extension**
-   - Click the puzzle icon in the toolbar
-   - Find "Smart Focus Assistant"
-   - Click the pin icon to keep it visible
+3. Open Chrome and go to:
+chrome://extensions/
 
-### For Developers
 
-1. **Clone and Setup**
-   ```bash
-   git clone https://github.com/yourusername/smart-focus-assistant.git
-   cd smart-focus-assistant
-   npm install  # If you add build tools later
-   ```
+4. Enable **Developer Mode** (top-right corner).
 
-2. **Development Mode**
-   - Load unpacked as described above
-   - Make changes to files
-   - Click reload icon in `chrome://extensions/` to test
+5. Either:
+- Drag and drop the `.crx` file *(if Chrome allows)*, or  
+- Click **Load unpacked** → select the extracted folder.
+
+6. Done ✅  
+The extension icon (🚫) will appear in your toolbar.
 
 ---
 
 ## 📁 Project Structure
 
-```
-smart-focus-assistant/
-├── manifest.json              # Extension configuration (Manifest V3)
-├── background.js              # Service worker - core logic
-├── content.js                 # Content script - page blocking
-├── popup.html                 # Main popup interface
-├── popup.js                   # Popup logic
-├── blocked.html               # Blocked page display
-├── analytics.html             # Analytics dashboard
-├── settings.html              # Settings page
-├── sites.html                 # Site management page
-├── icons/                     # Extension icons
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-├── assets/                    # Additional assets
-│   ├── motivation.json        # Motivational quotes
-│   └── sounds/                # Notification sounds
-├── styles/                    # Additional CSS (optional)
-│   └── common.css
-├── README.md                  # This file
-└── LICENSE                    # License information
-```
+Hackathon/
+├── manifest.json
+├── sites.html # Manage blocked sites
+├── sites.js # Logic for adding/removing sites
+├── blocked.html # Shown when blocked site is accessed
+├── blocked.js
+├── analytics.html # Focus analytics dashboard
+├── analytics.js
+├── icons/ # Extension icons
+│ ├── icon16.png
+│ ├── icon48.png
+│ └── icon128.png
+└── SmartFocusAssistant.crx # Prebuilt extension file
+
 
 ---
 
 ## 📖 Usage Guide
 
-### Getting Started
+### 1. Manage Sites
+- Add sites (e.g., `youtube.com`) to your blocklist.  
+- Use “Quick Add” to block popular distractions instantly.  
+- Remove, search, or clear sites anytime.
 
-1. **First Launch**
-   - Click the extension icon in toolbar
-   - Review default settings (25-min focus, 5-min break)
-   - Add distracting websites to block list
+### 2. View Analytics
+- Open the Analytics tab to see focus metrics.  
+- Charts show weekly, hourly, and daily patterns.  
+- Track your total blocked attempts and success rate.
 
-2. **Start a Focus Session**
-   - Click "Start Session" in the popup
-   - Timer begins counting down
-   - All blocked sites become inaccessible
-   - Extension badge shows remaining time
-
-3. **During a Session**
-   - Focus on your work
-   - Blocked sites show motivational page
-   - Progress bar fills as time passes
-   - Session dots show completed Pomodoros
-
-4. **Break Time**
-   - Notification alerts you when focus ends
-   - Take your scheduled break
-   - Blocked sites are accessible during breaks
-   - Start next session when ready
-
-### Managing Blocked Sites
-
-1. **Add Sites**
-   - Click "🚫 Sites" button
-   - Enter domain name (e.g., "facebook.com")
-   - Click "Add Site" or press Enter
-
-2. **Quick Add**
-   - Use preset buttons for popular sites
-   - Netflix, YouTube, Twitter, etc.
-
-3. **Remove Sites**
-   - Find site in list
-   - Click "Remove" button
-
-4. **Import/Export**
-   - Export your list as backup
-   - Import on other devices
-
-### Viewing Analytics
-
-1. **Open Dashboard**
-   - Click "📊 Analytics" button
-   - View comprehensive statistics
-
-2. **Available Charts**
-   - **Weekly Focus Time** - Bar chart of last 7 days
-   - **Best Focus Hours** - Line chart showing peak productivity
-   - **Monthly Progress** - 30-day trend analysis
-   - **Focus Distribution** - Pie chart of time allocation
-
-3. **AI Insights**
-   - Peak performance times
-   - Consistency score
-   - Focus trend analysis
-   - Personalized recommendations
-
-### Customizing Settings
-
-1. **Timer Durations**
-   - Focus session: 5-60 minutes
-   - Short break: 3-15 minutes
-   - Long break: 10-30 minutes
-   - Sessions until long break: 2-8
-
-2. **Quick Presets**
-   - Classic Pomodoro (25-5-15-4)
-   - Extended Focus (50-10-30-3)
-   - Short Bursts (15-3-10-6)
-   - Deep Work (45-15-30-2)
-
-3. **Notifications**
-   - Session completion alerts
-   - Break reminders
-   - Motivational messages
-
----
-
-## 🎯 Features Deep Dive
-
-### 1. Smart Website Blocking
-
-**How it Works:**
-- Uses `chrome.webNavigation` API to intercept page loads
-- Checks URL against block list in real-time
-- Redirects to motivational blocked page
-- Only active during focus sessions
-
-**Key Features:**
-- Domain-based blocking (blocks all pages from site)
-- Pattern matching for subdomains
-- Instant blocking with no delay
-- Visual feedback with custom blocked page
-
-### 2. Pomodoro Timer System
-
-**Implementation:**
-- Service worker manages timer state
-- Background processing ensures accuracy
-- Badge shows remaining time
-- Progress bar provides visual feedback
-- Session counter tracks completed Pomodoros
-
-**Customization:**
-- Adjust all timer durations
-- Set sessions until long break
-- Choose from preset configurations
-- Save custom preferences
-
-### 3. Analytics & Data Visualization
-
-**Tracked Metrics:**
-- Total sessions completed
-- Total focus time (minutes)
-- Current streak (consecutive days)
-- Distractions blocked
-- Hourly productivity patterns
-- Weekly/monthly trends
-
-**Visualizations:**
-- Chart.js powered charts
-- Responsive and interactive
-- Multiple chart types
-- Clean, modern design
-- Real-time updates
-
-### 4. AI-Powered Insights
-
-**Pattern Recognition:**
-- Identifies peak productivity hours
-- Calculates consistency score
-- Detects focus trends
-- Analyzes session completion rates
-
-**Recommendations:**
-- Optimal session timing
-- Break frequency suggestions
-- Streak maintenance tips
-- Custom improvement plans
-
-### 5. Motivational System
-
-**Components:**
-- Randomized quotes on popup
-- Blocked page encouragement
-- Progress celebration
-- Streak milestones
-- Completion animations
-
-**Quote Categories:**
-- Focus and concentration
-- Productivity and success
-- Discipline and consistency
-- Growth mindset
+### 3. Experience Blocking in Action
+- Visit a blocked site (e.g., YouTube).  
+- You’ll see a motivational blocked page (“Stay Focused!”).  
 
 ---
 
 ## 🔧 Development
 
-### Setting Up Development Environment
+For developers or contributors:
 
-1. **Prerequisites**
-   - Chrome/Edge browser
-   - Text editor (VS Code recommended)
-   - Basic knowledge of HTML, CSS, JavaScript
-   - Understanding of Chrome Extension APIs
 
-2. **Recommended VS Code Extensions**
-   - ESLint
-   - Prettier
-   - Chrome Extension Tools
-   - Live Server
+git clone https://github.com/Stormboomop/Hackathon.git
+cd Hackathon 
 
-### Code Architecture
+Then in Chrome:
 
-**Background Service Worker (`background.js`)**
-- Manages extension lifecycle
-- Handles timer logic
-- Stores session data
-- Processes blocking rules
-- Sends notifications
+Go to chrome://extensions/
 
-**Content Script (`content.js`)**
-- Runs on every page
-- Checks blocking status
-- Can inject UI elements
-- Communicates with background
+Enable Developer Mode
 
-**Popup Interface (`popup.html/js`)**
-- User interaction point
-- Displays current status
-- Controls timer
-- Shows quick stats
+Click Load unpacked
 
-### API Usage Examples
+Select the cloned folder
 
-**Storage API:**
-```javascript
-// Save settings
-await chrome.storage.local.set({ 
-  settings: { focusDuration: 25 } 
-});
+✅ Testing Checklist
+Functional
 
-// Retrieve settings
-const { settings } = await chrome.storage.local.get('settings');
-```
+ Add / remove sites works
 
-**Alarms API:**
-```javascript
-// Create alarm
-chrome.alarms.create('focusEnd', { 
-  delayInMinutes: 25 
-});
+ Quick add buttons function
 
-// Listen for alarm
-chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === 'focusEnd') {
-    // Handle focus end
-  }
-});
-```
+ Import/export JSON works
 
-**Notifications API:**
-```javascript
-chrome.notifications.create({
-  type: 'basic',
-  iconUrl: 'icons/icon128.png',
-  title: 'Focus Complete!',
-  message: 'Great work! Take a break.'
-});
-```
+ Analytics charts display correctly
 
-### Adding New Features
+ Notifications appear
 
-1. **New Blocked Page Theme**
-   - Edit `blocked.html`
-   - Add CSS styles
-   - Test with different sites
+Compatibility
 
-2. **Additional Chart Types**
-   - Import Chart.js documentation
-   - Add chart canvas to `analytics.html`
-   - Implement data processing in script
+ Works in Chrome (latest)
 
-3. **Custom Notification Sounds**
-   - Add audio files to `assets/sounds/`
-   - Use Audio API in background.js
-   - Add toggle in settings
+ Works in Edge and Brave
 
----
+Performance
 
-## ✅ Testing Checklist
+ Loads instantly
 
-### Functional Testing
+ Charts render smoothly
 
-- [ ] **Installation & Setup**
-  - [ ] Extension installs without errors
-  - [ ] Default settings are loaded
-  - [ ] Icons display correctly
-  - [ ] Popup opens properly
+ No noticeable lag
 
-- [ ] **Timer Functionality**
-  - [ ] Focus session starts correctly
-  - [ ] Timer counts down accurately
-  - [ ] Badge updates every minute
-  - [ ] Session completes with notification
-  - [ ] Break mode activates properly
-  - [ ] Stop button works
-  - [ ] Multiple sessions cycle correctly
+🚀 Future Enhancements
 
-- [ ] **Website Blocking**
-  - [ ] Blocked sites redirect during focus
-  - [ ] Blocked page displays correctly
-  - [ ] Sites accessible during breaks
-  - [ ] Custom sites can be added
-  - [ ] Sites can be removed
-  - [ ] Search filter works
-  - [ ] Import/export functions work
+⏱️ Pomodoro Timer Integration
 
-- [ ] **Analytics Dashboard**
-  - [ ] All charts display correctly
-  - [ ] Data updates in real-time
-  - [ ] Stats are accurate
-  - [ ] Charts are responsive
-  - [ ] Insights generate properly
+🧠 AI-Based Focus Recommendations
 
-- [ ] **Settings Page**
-  - [ ] All sliders work smoothly
-  - [ ] Presets apply correctly
-  - [ ] Settings save properly
-  - [ ] Reset function works
-  - [ ] Changes reflect in extension
+☁️ Cloud Sync (Firebase)
 
-### Performance Testing
+🏆 Gamification System (Achievements & XP)
 
-- [ ] Extension loads in <1 second
-- [ ] Popup renders instantly
-- [ ] No memory leaks during long sessions
-- [ ] Charts render smoothly
-- [ ] Background script is efficient
-- [ ] Storage operations are fast
+🌙 Dark Mode
 
-### Browser Compatibility
+📝 License
 
-- [ ] Works in Chrome (latest)
-- [ ] Works in Edge (latest)
-- [ ] Works in Brave
-- [ ] Works in Opera
+MIT License — you’re free to use, modify, and distribute this project with attribution.
 
-### Edge Cases
+🤝 Contributing
 
-- [ ] Handles invalid URLs
-- [ ] Works with 0 blocked sites
-- [ ] Works with 100+ blocked sites
-- [ ] Handles browser restart during session
-- [ ] Handles tab close during session
-- [ ] Works with slow internet
-- [ ] Works offline
+Fork the repository
 
----
+Create a feature branch: git checkout -b feature/new-feature
 
-## 📊 Evaluation Metrics
+Commit your changes
 
-### Accuracy of Website Blocking (25%)
-- ✅ Blocks all specified websites instantly
-- ✅ No false positives (legitimate sites not blocked)
-- ✅ Works across all subdomains
-- ✅ Handles URL variations (www, https, etc.)
-- ✅ Success Rate: **100%**
+Push and open a Pull Request
 
-### UI/UX Smoothness (20%)
-- ✅ Modern, clean design
-- ✅ Smooth animations and transitions
-- ✅ Responsive layouts
-- ✅ Intuitive navigation
-- ✅ Clear visual hierarchy
-- ✅ Accessibility considerations
-- **Score: 95/100**
+🌟 Acknowledgments
 
-### Data Visualization Clarity (20%)
-- ✅ Multiple chart types
-- ✅ Clear labels and legends
-- ✅ Responsive charts
-- ✅ Meaningful insights
-- ✅ Easy to understand
-- **Score: 93/100**
+Chart.js – for analytics visualizations
 
-### Creativity in Motivation Features (15%)
-- ✅ Randomized quotes
-- ✅ Blocked page encouragement
-- ✅ Progress celebration
-- ✅ Streak tracking
-- ✅ AI-powered recommendations
-- **Score: 90/100**
+Chrome Extensions API Docs – for manifest and storage
 
-### Practicality & Impact (20%)
-- ✅ Solves real problem
-- ✅ Easy to use
-- ✅ Customizable
-- ✅ Non-intrusive
-- ✅ Builds positive habits
-- **Score: 95/100**
-
-**Overall Project Score: 93.6/100**
-
----
-
-## 🚀 Future Enhancements
-
-### Phase 2 Features
-- [ ] **Cloud Sync** - Firebase integration for cross-device sync
-- [ ] **Team Mode** - Collaborative focus sessions
-- [ ] **Goal Setting** - Daily/weekly focus goals
-- [ ] **Rewards System** - Gamification with achievements
-- [ ] **Dark Mode** - Theme toggle
-- [ ] **Whitelist Mode** - Allow only specific sites
-
-### Phase 3 Features
-- [ ] **ML Predictions** - TensorFlow.js for pattern prediction
-- [ ] **Calendar Integration** - Sync with Google Calendar
-- [ ] **Task Management** - Built-in to-do list
-- [ ] **Focus Music** - Integrated ambient sounds
-- [ ] **Social Features** - Share progress with friends
-- [ ] **Mobile App** - React Native companion
-
-### Advanced AI Features
-- [ ] Predict best focus times based on history
-- [ ] Automatic break suggestions based on fatigue
-- [ ] Personalized motivation messages
-- [ ] Smart blocking (block based on usage patterns)
-- [ ] Productivity score calculation
-
----
-
-## 📝 License
-
-MIT License - feel free to use, modify, and distribute this project.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/smart-focus-assistant/issues)
-- **Email**: support@focusassistant.com
-- **Documentation**: [Wiki](https://github.com/yourusername/smart-focus-assistant/wiki)
-
----
-
-## 🌟 Acknowledgments
-
-- Chart.js for beautiful visualizations
-- Chrome Extension documentation
-- Pomodoro Technique by Francesco Cirillo
-- Open source community
-
----
-
-**Built with ❤️ for better productivity**
-
-*Last Updated: 2024*
+Hackathon 2025 – for the motivation to build this project
