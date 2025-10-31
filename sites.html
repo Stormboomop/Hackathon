@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Blocked Sites</title>
+
+  <style>
+    /* ——— your existing CSS (unchanged) ——— */
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:40px 20px;color:#fff}
+    .container{max-width:800px;margin:0 auto}
+    .header{text-align:center;margin-bottom:40px}
+    .header h1{font-size:42px;margin-bottom:10px}
+    .header p{font-size:18px;opacity:.9}
+    .add-site-section,.sites-list-section{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:20px;padding:30px;margin-bottom:30px}
+    .add-site-section h2,.sites-list-section h2{font-size:24px;margin-bottom:20px;display:flex;align-items:center;gap:10px;justify-content:space-between}
+    .input-group{display:flex;gap:15px;margin-bottom:15px}
+    input[type="text"]{flex:1;padding:15px 20px;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;transition:.3s}
+    input[type="text"]:focus{outline:none;background:rgba(255,255,255,.25);border-color:#fff}
+    input::placeholder{color:rgba(255,255,255,.6)}
+    .btn-add{padding:15px 30px;background:#fff;color:#667eea;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:.3s;white-space:nowrap}
+    .btn-add:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(0,0,0,.2)}
+    .help-text{font-size:14px;opacity:.8;margin-top:10px}
+    .quick-add{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .quick-add-btn{padding:8px 16px;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3);border-radius:20px;color:#fff;font-size:14px;cursor:pointer;transition:.3s}
+    .quick-add-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.05)}
+    .search-box{width:100%;padding:12px 20px;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3);border-radius:12px;color:#fff;font-size:16px;margin-bottom:20px}
+    .search-box:focus{outline:none;background:rgba(255,255,255,.25);border-color:#fff}
+    .sites-list{max-height:500px;overflow-y:auto;padding-right:10px}
+    .site-item{background:rgba(255,255,255,.1);border-radius:12px;padding:15px 20px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;transition:.3s;animation:slideIn .3s ease}
+    @keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+    .site-item:hover{background:rgba(255,255,255,.15);transform:translateX(5px)}
+    .site-info{display:flex;align-items:center;gap:15px;flex:1}
+    .btn-remove{padding:8px 16px;background:rgba(255,99,71,.7);border:none;border-radius:8px;color:#fff;font-size:14px;cursor:pointer;transition:.3s}
+    .btn-remove:hover{background:rgba(255,99,71,.9);transform:scale(1.05)}
+    .empty-state{text-align:center;padding:60px 20px;opacity:.8}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:30px}
+    .stat-card{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:15px;padding:20px;text-align:center}
+    .stat-value{font-size:36px;font-weight:bold;margin-bottom:5px}
+    .notification{position:fixed;top:20px;right:20px;padding:15px 25px;background:#4caf50;color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(-20px);transition:.3s;z-index:1000}
+    .notification.show{opacity:1;transform:translateY(0)}
+    .notification.error{background:#f44336}
+    .button-group{display:flex;gap:15px;margin-top:30px}
+    .btn-secondary{flex:1;padding:15px;background:rgba(255,255,255,.2);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:.3s}
+    .btn-secondary:hover{background:rgba(255,255,255,.3);transform:translateY(-2px)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚫 Blocked Sites</h1>
+      <p>Manage websites that distract you during focus sessions</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="blockedCount">0</div>
+        <div class="stat-label">Sites Blocked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="attemptCount">0</div>
+        <div class="stat-label">Access Attempts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="successRate">100%</div>
+        <div class="stat-label">Block Rate</div>
+      </div>
+    </div>
+
+    <div class="add-site-section">
+      <h2>➕ Add Website</h2>
+      <div class="input-group">
+        <input type="text" id="siteInput" placeholder="Enter website (e.g., facebook.com, twitter.com)" />
+        <button class="btn-add" id="btnAddSite">Add Site</button>
+      </div>
+      <div class="help-text">
+        💡 Tip: Just enter the domain name (e.g., "youtube.com"). The extension will block all pages from this domain.
+      </div>
+
+      <div style="margin-top: 20px;">
+        <strong>Quick Add Popular Distractions:</strong>
+        <div class="quick-add">
+          <button class="quick-add-btn" data-site="netflix.com">📺 Netflix</button>
+          <button class="quick-add-btn" data-site="twitch.tv">🎮 Twitch</button>
+          <button class="quick-add-btn" data-site="discord.com">💬 Discord</button>
+          <button class="quick-add-btn" data-site="whatsapp.com">📱 WhatsApp</button>
+          <button class="quick-add-btn" data-site="linkedin.com">💼 LinkedIn</button>
+          <button class="quick-add-btn" data-site="pinterest.com">📌 Pinterest</button>
+          <button class="quick-add-btn" data-site="amazon.com">🛒 Amazon</button>
+          <button class="quick-add-btn" data-site="ebay.com">🏪 eBay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sites-list-section">
+      <h2>
+        <span>📋 Blocked Websites</span>
+        <span class="site-count"><span id="siteCount">0</span> sites</span>
+      </h2>
+
+      <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search blocked sites..." />
+
+      <div class="sites-list" id="sitesList">
+        <div class="empty-state">
+          <div class="empty-state-icon">🌐</div>
+          <h3>No blocked sites yet</h3>
+          <p>Add websites that distract you to stay focused during sessions</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-secondary" id="btnClearAll">🗑️ Clear All</button>
+      <button class="btn-secondary" id="btnExport">📥 Export</button>
+      <button class="btn-secondary" id="btnImport">📤 Import</button>
+      <button class="btn-secondary" id="btnBack">← Back</button>
+    </div>
+  </div>
+
+  <div class="notification" id="notification">Site added successfully!</div>
+
+  <script src="sites.js"></script>
+</body>
+</html>
