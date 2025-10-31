@@ -63,7 +63,7 @@ A Chrome/Edge extension that helps users maintain focus, block distractions, and
 
 2. Download either:
    - `SmartFocusAssistant.crx` — packaged extension (for Chromium browsers), **or**
-   - “Source code (ZIP)” — unpacked folder for Chrome.
+   - `Focus-Assitant.zip` — unpacked folder for Chrome.
 
 3. Open Chrome and go to:
 chrome://extensions/
