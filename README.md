@@ -117,23 +117,6 @@ Hackathon/
 
 ---
 
-## 🔧 Development
-
-For developers or contributors:
-
-
-git clone https://github.com/Stormboomop/Hackathon.git
-cd Hackathon 
-
-Then in Chrome:
-
-Go to chrome://extensions/
-
-Enable Developer Mode
-
-Click Load unpacked
-
-Select the cloned folder
 
 ✅ Testing Checklist
 Functional
